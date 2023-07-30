@@ -15,6 +15,7 @@ import AddExpense from "./AddExpense";
 const Expense = () => {
   const dispatch = useDispatch();
   const [query, setQuery] = useState("");
+  const [category, setCategory] = useState(null);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
@@ -22,6 +23,7 @@ const Expense = () => {
   const [view, setView] = useState(false);
   const [edit, setEdit] = useState(false);
   const [viewData, setViewData] = useState(null);
+  const [filteredData, setFilteredData] = useState([]);
 
   const allExpenseData = useSelector(
     (state) => state.expenseReducer.getAllExpense
@@ -46,6 +48,15 @@ const Expense = () => {
       setData(allExpenseData);
     }
   }, [query]);
+
+  useEffect(() => {
+    console.log(category);
+    if (category) {
+      const searchData = data?.filter((item) => item.date.includes(category));
+      setFilteredData(searchData);
+    }
+  }, [category]);
+  console.log(allExpenseData);
 
   const menu = (
     <Menu
@@ -239,10 +250,13 @@ const Expense = () => {
         <div className=" flex justify-between px-6 items-center font-bold py-6">
           <p>MY EXPENSE MANAGER</p>
           <div className="">
-            <select className="p-1 ml-2">
+            <select
+              className="p-1 ml-2"
+              onChange={(e) => setCategory(e.target.value)}
+            >
               <option value="">filter by Date of Expense</option>
-              {data &&
-                data.map((item) => (
+              {allExpenseData &&
+                allExpenseData.map((item) => (
                   <option value={item.date}>{item.date}</option>
                 ))}
             </select>
@@ -265,7 +279,7 @@ const Expense = () => {
         <div className="">
           <Tables
             columns={Ticketcolumns}
-            data={data}
+            data={category ? filteredData : data}
             scroll={{
               x: 700,
             }}

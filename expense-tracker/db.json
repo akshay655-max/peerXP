@@ -15,6 +15,28 @@
       "date": "2023-07-06",
       "amount": "555",
       "id": 4
+    },
+    {
+      "name": "surya",
+      "description": "ccc",
+      "category": "health",
+      "date": "2023-07-15",
+      "amount": "666",
+      "id": 5
+    },
+    {
+      "name": "mohan",
+      "description": "uiopjh",
+      "category": "education",
+      "date": "2023-07-15",
+      "amount": "6666",
+      "id": 6
+    }
+  ],
+  "login":[
+    {
+      "email":"akshaysuman129@gmail.com",
+      "password":"Akshay@123"
     }
   ]
 }
