@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { getAllExpense, updateExpense } from "../Redux/expense.action";
-import Swal from "sweetalert2";
+import { createExpense } from "../Redux/expense.action";
 
-const EditExpense = ({ setEdit, editData }) => {
+const AddExpense = ({ setOpen }) => {
   const {
     register,
     formState: { errors },
@@ -12,27 +11,18 @@ const EditExpense = ({ setEdit, editData }) => {
   } = useForm();
   const dispatch = useDispatch();
   const onSubmit = (data) => {
-    dispatch(updateExpense(editData.id, data));
-    setEdit(false);
+    dispatch(createExpense(data));
+    setOpen(false);
   };
-  const initialValues = {
-    name: editData.name,
-    description: editData.description,
-    category: editData.category,
-    date: editData.date,
-    amount: editData.amount,
-  };
-  const [formData, setFormData] = useState(initialValues);
   return (
     <>
-      <div className="border-2 border-black h-[500px] p-6">
+      <div className="border-2 border-black h-[600px] p-6">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-3">
             <div className="font-bold">Name</div>
             <input
               placeholder="Enter Name"
               type="text"
-              defaultValue={formData.name}
               {...register("name", { required: "Name is required" })}
               className="bg-gray-300 w-[100%] p-1 focus:outline-none focus:border-none focus:ring-0 px-2"
             />
@@ -45,7 +35,6 @@ const EditExpense = ({ setEdit, editData }) => {
             <input
               placeholder="Enter description"
               type="text"
-              defaultValue={formData.description}
               {...register("description", {
                 required: "Description is required",
               })}
@@ -59,14 +48,14 @@ const EditExpense = ({ setEdit, editData }) => {
           <div className="py-3">
             <div className="font-bold">Category</div>
             <select
-              placeholder="Enter Category"
               type="text"
-              defaultValue={formData.category}
               {...register("category", {
                 required: "Category is required",
               })}
               className="bg-gray-300 w-[100%] p-1 focus:outline-none focus:border-none focus:ring-0 px-2"
             >
+              {" "}
+              <option value="">choose category</option>
               <option value="books">Books</option>
               <option value="health">Health</option>
               <option value="electronic">Electronics</option>
@@ -82,8 +71,8 @@ const EditExpense = ({ setEdit, editData }) => {
             <div className="font-bold">Date of Expense</div>
             <input
               placeholder="Enter Date"
-              type="text"
-              defaultValue={formData.date}
+              type="date"
+              name="date"
               {...register("date", {
                 required: "Date is required",
               })}
@@ -97,7 +86,6 @@ const EditExpense = ({ setEdit, editData }) => {
             <div className="font-bold">Expense Amount</div>
             <input
               placeholder="Enter Expense Amount"
-              defaultValue={formData.amount}
               type="text"
               {...register("amount", {
                 required: "Amount is required",
@@ -111,7 +99,7 @@ const EditExpense = ({ setEdit, editData }) => {
           <div className="flex justify-between">
             <button
               className="bg-slate-500 px-[60px] py-1  text-white rounded-sm"
-              onClick={() => setEdit(false)}
+              onClick={() => setOpen(false)}
             >
               Cancel
             </button>
@@ -128,4 +116,4 @@ const EditExpense = ({ setEdit, editData }) => {
   );
 };
 
-export default EditExpense;
+export default AddExpense;

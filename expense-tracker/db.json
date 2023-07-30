@@ -1,12 +1,20 @@
 {
   "expense": [
     {
-      "id": 2,
-      "name": "del book",
-      "date": "27 febuary,2023",
-      "category": "Books",
-      "description": "jjjkj",
-      "amount": "2000"
+      "name": "kam",
+      "description": "kjbkjkj",
+      "category": "books",
+      "date": "2023-06-26",
+      "amount": "890",
+      "id": 3
+    },
+    {
+      "name": "akshay2",
+      "description": "ssss",
+      "category": "travel",
+      "date": "2023-07-06",
+      "amount": "555",
+      "id": 4
     }
   ]
 }

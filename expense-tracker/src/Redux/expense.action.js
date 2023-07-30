@@ -30,17 +30,7 @@ export const createExpense = (data) => {
       .then(function (response) {
         // handle success
         if (response) {
-          Swal.mixin({
-            toast: true,
-            position: "top-right",
-            iconColor: "green",
-            customClass: {
-              popup: "colored-toast",
-            },
-            showConfirmButton: false,
-            timer: 1500,
-            timerProgressBar: true,
-          });
+          Swal.fire("Data added successfully");
           dispatch({
             type: CREATEEXPENSE,
             payload: response,
@@ -119,21 +109,11 @@ export const updateExpense = (id, data) => {
   return async (dispatch) => {
     axios
       .patch(`http://localhost:3004/expense/${id}`, data)
-      .then(function (response) {
+      .then(async function (response) {
         // handle success
         if (response) {
           dispatch(getAllExpense);
-          Swal.mixin({
-            toast: true,
-            position: "top-right",
-            iconColor: "green",
-            customClass: {
-              popup: "colored-toast",
-            },
-            showConfirmButton: false,
-            timer: 1500,
-            timerProgressBar: true,
-          });
+          await Swal.fire("updated data successfully");
           dispatch({
             type: UPDATEEXPENSE,
             payload: response,

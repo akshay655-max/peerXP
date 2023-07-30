@@ -7,9 +7,14 @@ import Tables from "../table";
 import SideDrawer from "../drawer";
 import EditExpense from "./EditExpense";
 import Swal from "sweetalert2";
+import { MdEdit } from "react-icons/md";
+import { AiFillDelete } from "react-icons/ai";
+import { GrFormClose } from "react-icons/gr";
+import AddExpense from "./AddExpense";
 
 const Expense = () => {
   const dispatch = useDispatch();
+  const [query, setQuery] = useState("");
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
@@ -21,6 +26,7 @@ const Expense = () => {
   const allExpenseData = useSelector(
     (state) => state.expenseReducer.getAllExpense
   );
+  //get all data when its loaded the page for the first time
   useEffect(() => {
     dispatch(getAllExpense);
     if (allExpenseData) {
@@ -28,27 +34,22 @@ const Expense = () => {
     }
   }, [dispatch, allExpenseData?.length]);
 
+  //search expense by name
+  useEffect(() => {
+    if (query) {
+      const searchData = data?.filter((item) =>
+        item.name.toLowerCase().includes(query.toLowerCase())
+      );
+      setData(searchData);
+    }
+    if (query === "") {
+      setData(allExpenseData);
+    }
+  }, [query]);
+
   const menu = (
     <Menu
       items={[
-        {
-          label: (
-            <div
-              className="flex items-center pl-[20px]  text-[12px] uppercase"
-              onClick={() => {
-                if (viewData) {
-                  setView(true);
-                }
-              }}
-            >
-              <div className=" font-normal hover:text-blue-400 " type="">
-                <i className="ri-eye-line ri-lg mr-2 align-sub"></i>
-                view
-              </div>
-            </div>
-          ),
-          key: "0",
-        },
         {
           label: (
             <div
@@ -59,10 +60,8 @@ const Expense = () => {
                 }
               }}
             >
-              <div className=" font-normal hover:text-blue-400">
-                <i className="ri-pencil-line ri-lg mr-1.5 align-sub"></i>
-                edit
-              </div>
+              <MdEdit className="text-green-700" />
+              <span className="ml-2">edit</span>
             </div>
           ),
           key: "2",
@@ -95,10 +94,8 @@ const Expense = () => {
                 }
               }}
             >
-              <div className=" font-normal hover:text-blue-400">
-                <i className="ri-delete-bin-line ri-lg mr-1.5 align-sub"></i>
-                delete
-              </div>
+              <AiFillDelete className="text-red-700" />
+              <span className="ml-2">delete</span>
             </div>
           ),
           key: "3",
@@ -187,7 +184,7 @@ const Expense = () => {
 
   return (
     <>
-      {edit && (
+      {open && (
         <SideDrawer
           placement="right"
           width={"65%"}
@@ -196,6 +193,33 @@ const Expense = () => {
             <div className="float-right hover:rotate-180 flex absolute z-40  bg-white w-8 h-8 text-base items-center justify-center text-gray-900 rounded-full  content-center top-[50%] left-[-42px]">
               <i
                 class="ri-close-line ri-1x absolute z-40 left-50 bottom-450 "
+                onClick={() => {
+                  setOpen(false);
+                }}
+              />
+            </div>
+          }
+          onClose={() => setOpen(false)}
+          closable={true}
+          visible={open}
+          bodyStyle={{
+            backgroundColor: "",
+            padding: "25px",
+            paddingRight: "10px",
+          }}
+        >
+          <AddExpense setOpen={setOpen} />
+        </SideDrawer>
+      )}
+      {edit && (
+        <SideDrawer
+          placement="right"
+          width={"65%"}
+          headerStyle={{ padding: "0px" }}
+          closeIcon={
+            <div className="float-right hover:rotate-180 flex absolute z-40  bg-white w-8 h-8 text-base items-center justify-center text-gray-900 rounded-full  content-center top-[50%] left-[-42px]">
+              <GrFormClose
+                className="text-red-900"
                 onClick={() => {
                   setView(false);
                   setEdit(false);
@@ -208,38 +232,56 @@ const Expense = () => {
           visible={edit}
           bodyStyle={{ backgroundColor: "", padding: "30px" }}
         >
-          <EditExpense
-          // assignData={assignData}
-          // setEdit={setEdit}
-          // setView={setView}
-          // statusId={statusId}
-          // editData={viewData}
-          // edit={edit}
-          // allTicketsData={allTicketsData}
-          // setData={setData}
-          // getDate={getDate}
-          />
+          <EditExpense setEdit={setEdit} editData={viewData} />
         </SideDrawer>
       )}
-      <div>
-        <Tables
-          columns={Ticketcolumns}
-          data={data}
-          scroll={{
-            x: 700,
-          }}
-          pagination={{
-            current: page,
-            pageSize: pageSize,
-            showTotal: showTotal,
-            hideOnSinglePage: true,
-            pageSizeOptions: [5, 10, 15, 20],
-            onChange: (page, pageSize) => {
-              setPage(page);
-              setPageSize(pageSize);
-            },
-          }}
-        />
+      <div className="border-2 border-black p-4">
+        <div className=" flex justify-between px-6 items-center font-bold py-6">
+          <p>MY EXPENSE MANAGER</p>
+          <div className="">
+            <select className="p-1 ml-2">
+              <option value="">filter by Date of Expense</option>
+              {data &&
+                data.map((item) => (
+                  <option value={item.date}>{item.date}</option>
+                ))}
+            </select>
+            <input
+              type="text"
+              placeholder="search expense by name"
+              onChange={(e) => {
+                setQuery(e.target.value);
+              }}
+              className="border p-1 ml-2  border-black outline-black focus:outline-black focus:border-black focus:ring-0 "
+            />
+            <button
+              className="bg-green-500 px-8 ml-2 py-1 text-white rounded-sm "
+              onClick={() => setOpen(true)}
+            >
+              +New Expense
+            </button>
+          </div>
+        </div>
+        <div className="">
+          <Tables
+            columns={Ticketcolumns}
+            data={data}
+            scroll={{
+              x: 700,
+            }}
+            pagination={{
+              current: page,
+              pageSize: pageSize,
+              showTotal: showTotal,
+              hideOnSinglePage: true,
+              pageSizeOptions: [5, 10, 15, 20],
+              onChange: (page, pageSize) => {
+                setPage(page);
+                setPageSize(pageSize);
+              },
+            }}
+          />
+        </div>
       </div>
     </>
   );
