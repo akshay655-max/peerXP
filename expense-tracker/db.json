@@ -31,12 +31,28 @@
       "date": "2023-07-15",
       "amount": "6666",
       "id": 6
+    },
+    {
+      "name": "sss",
+      "description": "ddd",
+      "category": "electronic",
+      "date": "2023-07-08",
+      "amount": "545",
+      "id": 7
+    },
+    {
+      "name": "akshay",
+      "description": "ff",
+      "category": "health",
+      "date": "2023-07-13",
+      "amount": "666",
+      "id": 8
     }
   ],
-  "login":[
+  "login": [
     {
-      "email":"akshaysuman129@gmail.com",
-      "password":"Akshay@123"
+      "email": "akshaysuman129@gmail.com",
+      "password": "Akshay@123"
     }
   ]
 }

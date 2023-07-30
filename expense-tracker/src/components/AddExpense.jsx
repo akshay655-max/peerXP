@@ -23,7 +23,13 @@ const AddExpense = ({ setOpen }) => {
             <input
               placeholder="Enter Name"
               type="text"
-              {...register("name", { required: "Name is required" })}
+              {...register("name", {
+                required: "Name is required",
+                maxLength: {
+                  value: 140,
+                  message: "Name must not exceed 140 characters",
+                },
+              })}
               className="bg-gray-300 w-[100%] p-1 focus:outline-none focus:border-none focus:ring-0 px-2"
             />
             {errors.name && (
@@ -86,9 +92,13 @@ const AddExpense = ({ setOpen }) => {
             <div className="font-bold">Expense Amount</div>
             <input
               placeholder="Enter Expense Amount"
-              type="text"
+              type="number"
               {...register("amount", {
                 required: "Amount is required",
+                pattern: {
+                  value: /^[1-9]\d*$/,
+                  message: "Please enter a positive integer for the amount",
+                },
               })}
               className="bg-gray-300 w-[100%] p-1 focus:outline-none focus:border-none focus:ring-0 px-2"
             />
