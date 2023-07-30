@@ -1,12 +1,12 @@
 {
   "expense": [
     {
-      "id": 1,
-      "name": "purchased book",
+      "id": 2,
+      "name": "del book",
       "date": "27 febuary,2023",
-      "category":"Books",
-      "description":"jjjkj",
-      "amount":"2000"
+      "category": "Books",
+      "description": "jjjkj",
+      "amount": "2000"
     }
   ]
 }
