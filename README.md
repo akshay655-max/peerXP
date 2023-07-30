@@ -34,3 +34,13 @@ Your app is ready to be deployed!
 ## Deployment
 
 now we can deploy out application anywhere we wanted based on the build folder.
+
+## Techology Stack Used
+
+- React js
+- Redux
+- json server
+- Tailwind Css
+- Ant design
+- React icons
+- javascript
