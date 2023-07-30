@@ -17,7 +17,7 @@ const AddExpense = ({ setOpen }) => {
   };
   return (
     <>
-      <div className="border-2 border-black h-[600px] p-6">
+      <div className=" h-[600px] p-6">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-3">
             <div className="font-bold">Name</div>
@@ -31,7 +31,7 @@ const AddExpense = ({ setOpen }) => {
                   message: "Name must not exceed 140 characters",
                 },
               })}
-              className="bg-gray-300 w-[100%] p-1 focus:outline-none focus:border-none focus:ring-0 px-2"
+              className="bg-gray-300 w-[100%] p-1 focus:outline-none focus:border-none focus:ring-0 px-2 rounded-s"
             />
             {errors.name && (
               <p className="text-red-400">{errors.name.message}</p>
@@ -45,7 +45,7 @@ const AddExpense = ({ setOpen }) => {
               {...register("description", {
                 required: "Description is required",
               })}
-              className="bg-gray-300 w-[100%] p-1 focus:outline-none focus:border-none focus:ring-0 px-2"
+              className="bg-gray-300 rounded-s w-[100%] p-1 focus:outline-none focus:border-none focus:ring-0 px-2"
             />
             {errors.description && (
               <p className="text-red-400">{errors.description.message}</p>
@@ -59,7 +59,7 @@ const AddExpense = ({ setOpen }) => {
               {...register("category", {
                 required: "Category is required",
               })}
-              className="bg-gray-300 w-[100%] p-1 focus:outline-none focus:border-none focus:ring-0 px-2"
+              className="bg-gray-300 rounded-s w-[100%] p-1 focus:outline-none focus:border-none focus:ring-0 px-2"
             >
               {" "}
               <option value="">choose category</option>
@@ -83,7 +83,7 @@ const AddExpense = ({ setOpen }) => {
               {...register("date", {
                 required: "Date is required",
               })}
-              className="bg-gray-300 w-[100%] p-1 focus:outline-none focus:border-none focus:ring-0 px-2"
+              className="bg-gray-300 rounded-s w-[100%] p-1 focus:outline-none focus:border-none focus:ring-0 px-2"
             />
             {errors.date && (
               <p className="text-red-400">{errors.date.message}</p>

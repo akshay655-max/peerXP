@@ -25,7 +25,7 @@ const EditExpense = ({ setEdit, editData }) => {
   const [formData, setFormData] = useState(initialValues);
   return (
     <>
-      <div className="border-2 border-black  p-6">
+      <div className="  p-6">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-3">
             <div className="font-bold">Name</div>

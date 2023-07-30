@@ -11,6 +11,7 @@ import { MdEdit } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
 import { GrFormClose } from "react-icons/gr";
 import AddExpense from "./AddExpense";
+import { IoMdMore } from "react-icons/io";
 
 const Expense = () => {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ const Expense = () => {
     }
   }, [query]);
 
+  //filter by date of expense
   useEffect(() => {
     console.log(category);
     if (category) {
@@ -57,6 +59,7 @@ const Expense = () => {
     }
   }, [category]);
 
+  //to calculate updated_at in hours and mins
   const getTimeDifference = (updatedAt) => {
     const currentDateTime = new Date();
     const updatedDateTime = new Date(updatedAt);
@@ -188,16 +191,13 @@ const Expense = () => {
           <div>{getTimeDifference(record.updated_at)}</div>
         </>
       ),
+      responsive: ["xs", "md"],
     },
 
     {
       title: "ACTION",
       dataIndex: "action",
       key: "action",
-      sorter: (a, b) => a.action - b.action,
-      ellipsis: {
-        showTitle: false,
-      },
       render: (_, record) => (
         <Dropdown
           overlay={menu}
@@ -208,7 +208,7 @@ const Expense = () => {
           }}
         >
           <div className="w-32 cursor-pointer">
-            View <i className="ri-arrow-down-s-fill ri-lg ml-2 text-black"></i>
+            <IoMdMore className="text-[20px]" />
           </div>
         </Dropdown>
       ),
@@ -273,7 +273,7 @@ const Expense = () => {
           <EditExpense setEdit={setEdit} editData={viewData} />
         </SideDrawer>
       )}
-      <div className="border-2 border-black p-4 bg-blue-100">
+      <div className=" p-4 bg-blue-100 h-screen">
         <div className=" md:flex justify-between px-6 items-center font-bold py-6">
           <p className="">MY EXPENSE MANAGER</p>
           <div className="md:mt-0 mt-5">
@@ -303,7 +303,7 @@ const Expense = () => {
             </button>
           </div>
         </div>
-        <div className="mb-10">
+        <div className="mb-6">
           <Tables
             columns={Ticketcolumns}
             data={category ? filteredData : data}

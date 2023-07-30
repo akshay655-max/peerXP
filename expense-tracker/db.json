@@ -1,60 +1,6 @@
 {
   "expense": [
     {
-      "name": "kam",
-      "description": "kjbkjkj",
-      "category": "books",
-      "date": "2023-06-26",
-      "amount": "890",
-      "updated_at": "2023-07-30T14:24:04.431Z",
-      "id": 3
-    },
-    {
-      "name": "akshay2",
-      "description": "ssss",
-      "category": "travel",
-      "date": "2023-07-06",
-      "amount": "555",
-      "updated_at": "2023-07-30T14:24:04.431Z",
-      "id": 4
-    },
-    {
-      "name": "surya",
-      "description": "ccc",
-      "category": "health",
-      "date": "2023-07-15",
-      "amount": "666",
-      "updated_at": "2023-07-30T14:24:04.431Z",
-      "id": 5
-    },
-    {
-      "name": "mohan",
-      "description": "uiopjh",
-      "category": "education",
-      "date": "2023-07-15",
-      "amount": "6666",
-      "updated_at": "2023-07-30T14:24:04.431Z",
-      "id": 6
-    },
-    {
-      "name": "sssa",
-      "description": "ddd",
-      "category": "electronic",
-      "date": "2023-07-08",
-      "amount": "545",
-      "updated_at": "2023-07-30T14:24:04.431Z",
-      "id": 7
-    },
-    {
-      "name": "akshay",
-      "description": "ff",
-      "category": "health",
-      "date": "2023-07-13",
-      "amount": "666",
-      "updated_at": "2023-07-30T14:24:04.431Z",
-      "id": 8
-    },
-    {
       "name": "akshay suman",
       "description": "sss",
       "category": "electronic",
@@ -80,6 +26,33 @@
       "amount": "555",
       "updated_at": "2023-07-30T15:02:26.207Z",
       "id": 11
+    },
+    {
+      "name": "kal",
+      "description": "hihkj",
+      "category": "travel",
+      "date": "2023-06-29",
+      "amount": "900",
+      "updated_at": "2023-07-30T15:25:09.856Z",
+      "id": 12
+    },
+    {
+      "name": "don",
+      "description": "jkjhkjhk",
+      "category": "travel",
+      "date": "2023-07-06",
+      "amount": "400",
+      "updated_at": "2023-07-30T17:24:32.429Z",
+      "id": 14
+    },
+    {
+      "name": "akshay",
+      "description": "ssss",
+      "category": "travel",
+      "date": "2023-07-05",
+      "amount": "233",
+      "updated_at": "2023-07-30T17:27:50.144Z",
+      "id": 15
     }
   ],
   "login": [
