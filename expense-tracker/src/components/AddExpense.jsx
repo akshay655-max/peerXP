@@ -11,6 +11,7 @@ const AddExpense = ({ setOpen }) => {
   } = useForm();
   const dispatch = useDispatch();
   const onSubmit = (data) => {
+    data.updated_at = new Date().toISOString();
     dispatch(createExpense(data));
     setOpen(false);
   };
@@ -106,15 +107,15 @@ const AddExpense = ({ setOpen }) => {
               <p className="text-red-400">{errors.amount.message}</p>
             )}
           </div>
-          <div className="flex justify-between">
+          <div className="md:flex justify-between">
             <button
-              className="bg-slate-500 px-[60px] py-1  text-white rounded-sm"
+              className="bg-slate-500 md:px-[80px] px-[60px] md:py-2 py-3  text-white rounded-sm"
               onClick={() => setOpen(false)}
             >
               Cancel
             </button>
             <button
-              className="bg-green-500 px-8 py-1 text-white rounded-sm "
+              className="bg-green-500 px-[60px] py-1 md:mt-0 mt-4 text-white rounded-sm md:text-[14px] text-[10px] "
               type="submit"
             >
               Create Expense

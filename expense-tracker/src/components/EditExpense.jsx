@@ -25,7 +25,7 @@ const EditExpense = ({ setEdit, editData }) => {
   const [formData, setFormData] = useState(initialValues);
   return (
     <>
-      <div className="border-2 border-black h-[500px] p-6">
+      <div className="border-2 border-black  p-6">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="py-3">
             <div className="font-bold">Name</div>
@@ -108,15 +108,15 @@ const EditExpense = ({ setEdit, editData }) => {
               <p className="text-red-400">{errors.amount.message}</p>
             )}
           </div>
-          <div className="flex justify-between">
+          <div className="md:flex justify-between">
             <button
-              className="bg-slate-500 px-[60px] py-1  text-white rounded-sm"
+              className="bg-slate-500 md:px-[80px] px-[45px] md:py-2 py-3  text-white rounded-sm"
               onClick={() => setEdit(false)}
             >
               Cancel
             </button>
             <button
-              className="bg-green-500 px-8 py-1 text-white rounded-sm "
+              className="bg-green-500 px-[45px] py-1 md:mt-0 mt-4 text-white rounded-sm md:text-[14px] text-[10px] "
               type="submit"
             >
               Create Expense

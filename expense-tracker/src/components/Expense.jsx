@@ -56,7 +56,18 @@ const Expense = () => {
       setFilteredData(searchData);
     }
   }, [category]);
-  console.log(allExpenseData);
+
+  const getTimeDifference = (updatedAt) => {
+    const currentDateTime = new Date();
+    const updatedDateTime = new Date(updatedAt);
+
+    const timeDifference = currentDateTime - updatedDateTime;
+    const hoursDifference = Math.floor(timeDifference / (1000 * 60 * 60));
+    const minutesDifference = Math.floor(
+      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+    );
+    return `${hoursDifference} hours and ${minutesDifference} minutes ago`;
+  };
 
   const menu = (
     <Menu
@@ -144,6 +155,11 @@ const Expense = () => {
       ellipsis: {
         showTitle: false,
       },
+      render: (_, record) => (
+        <>
+          <div>{`INR ${record.amount}`}</div>
+        </>
+      ),
       responsive: ["xs", "md"],
     },
 
@@ -163,6 +179,17 @@ const Expense = () => {
         </>
       ),
     },
+    {
+      title: "UPDATED_AT",
+      dataIndex: "updated_at",
+      key: "updated_at",
+      render: (_, record) => (
+        <>
+          <div>{getTimeDifference(record.updated_at)}</div>
+        </>
+      ),
+    },
+
     {
       title: "ACTION",
       dataIndex: "action",
@@ -202,8 +229,8 @@ const Expense = () => {
           headerStyle={{ padding: "0px" }}
           closeIcon={
             <div className="float-right hover:rotate-180 flex absolute z-40  bg-white w-8 h-8 text-base items-center justify-center text-gray-900 rounded-full  content-center top-[50%] left-[-42px]">
-              <i
-                class="ri-close-line ri-1x absolute z-40 left-50 bottom-450 "
+              <GrFormClose
+                className="text-red-900"
                 onClick={() => {
                   setOpen(false);
                 }}
@@ -246,12 +273,12 @@ const Expense = () => {
           <EditExpense setEdit={setEdit} editData={viewData} />
         </SideDrawer>
       )}
-      <div className="border-2 border-black p-4">
-        <div className=" flex justify-between px-6 items-center font-bold py-6">
-          <p>MY EXPENSE MANAGER</p>
-          <div className="">
+      <div className="border-2 border-black p-4 bg-blue-100">
+        <div className=" md:flex justify-between px-6 items-center font-bold py-6">
+          <p className="">MY EXPENSE MANAGER</p>
+          <div className="md:mt-0 mt-5">
             <select
-              className="p-1 ml-2"
+              className="p-1  md:ml-2 border-black border outline-black focus:outline-black focus:border-black"
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="">filter by Date of Expense</option>
@@ -266,17 +293,17 @@ const Expense = () => {
               onChange={(e) => {
                 setQuery(e.target.value);
               }}
-              className="border p-1 ml-2  border-black outline-black focus:outline-black focus:border-black focus:ring-0 "
+              className="border p-1 md:ml-2 md:mt-0 mt-4  border-black outline-black focus:outline-black focus:border-black focus:ring-0 "
             />
             <button
-              className="bg-green-500 px-8 ml-2 py-1 text-white rounded-sm "
+              className="bg-green-500 md:px-8 px-12 md:ml-2 py-1 md:mt-0 mt-4  text-white rounded-sm "
               onClick={() => setOpen(true)}
             >
               +New Expense
             </button>
           </div>
         </div>
-        <div className="">
+        <div className="mb-10">
           <Tables
             columns={Ticketcolumns}
             data={category ? filteredData : data}
