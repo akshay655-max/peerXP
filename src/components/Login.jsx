@@ -19,8 +19,8 @@ const schema = yup.object().shape({
 });
 
 const Login = () => {
-  const email = "akshaysuman129@gmail.com";
-  const password = "Akshay@123";
+  const email = "admin@gmail.com";
+  const password = "admin@123";
   const {
     register,
     handleSubmit,

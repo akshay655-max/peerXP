@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 //get all expenses
 export const getAllExpense = async (dispatch) => {
   axios
-    .get(" http://localhost:3004/expense")
+    .get(" https://expense-data-5zpz.onrender.com/expense")
     .then(function (response) {
       // handle success
       dispatch({ type: GETALLEXPENSE, payload: response.data });
@@ -26,7 +26,7 @@ export const getAllExpense = async (dispatch) => {
 export const createExpense = (data) => {
   return async (dispatch) => {
     axios
-      .post(" http://localhost:3004/expense", data)
+      .post("https://expense-data-5zpz.onrender.com/expense", data)
       .then(function (response) {
         // handle success
         if (response) {
@@ -62,7 +62,7 @@ export const createExpense = (data) => {
 export const deleteExpense = (id) => {
   return async (dispatch) => {
     axios
-      .delete(`http://localhost:3004/expense/${id}`)
+      .delete(`https://expense-data-5zpz.onrender.com/expense/${id}`)
       .then(function (response) {
         // handle success
         if (response) {
@@ -108,7 +108,7 @@ export const deleteExpense = (id) => {
 export const updateExpense = (id, data) => {
   return async (dispatch) => {
     axios
-      .patch(`http://localhost:3004/expense/${id}`, data)
+      .patch(`https://expense-data-5zpz.onrender.com/expense/${id}`, data)
       .then(async function (response) {
         // handle success
         if (response) {
